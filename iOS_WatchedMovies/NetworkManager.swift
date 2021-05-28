@@ -37,7 +37,7 @@ class NetworkManager {
       
       do {
         let decoder = JSONDecoder()
-        decoder.keyDecodingStrategy = .useDefaultKeys
+//        decoder.keyDecodingStrategy = .useDefaultKeys
         let searchResult = try decoder.decode(Search.self, from: data)
         completion(.success(searchResult))
       } catch {

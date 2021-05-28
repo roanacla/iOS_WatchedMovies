@@ -15,13 +15,18 @@ class ViewController: UIViewController {
   //MARK: - Properties
   var dataSource: [Movie] = []
   var totalResults = 0
+  var hasMoreResults: Bool {
+    return dataSource.count < totalResults ? true : false
+  }
+  var currentPage = 1
+  var movieName = "terminator"
   
   //MARK: - View Life Cycle
   override func viewDidLoad() {
     super.viewDidLoad()
     configureUITableView()
     configureMainView()
-    getMovieData(movieName: "batman")
+    getMovieData(movieName: movieName, page: currentPage)
   }
   
   
@@ -47,8 +52,8 @@ class ViewController: UIViewController {
     ])
   }
   
-  func getMovieData(movieName: String) {
-    NetworkManager.shared.getMovieWithName(name: movieName) { (results) in
+  func getMovieData(movieName: String, page: Int) {
+    NetworkManager.shared.getMovieWithName(name: movieName, page: page) { (results) in
       switch results {
       case .success(let search):
         self.totalResults = Int(search.totalResults) ?? 0
@@ -77,6 +82,13 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     let movie = dataSource[indexPath.row]
     cell?.setCell(movie: movie)
     return cell!
+  }
+  
+  func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+    if hasMoreResults {
+      currentPage += 1
+      getMovieData(movieName: movieName, page: currentPage)
+    }
   }
 }
 
