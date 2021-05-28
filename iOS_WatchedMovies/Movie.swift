@@ -18,6 +18,7 @@ struct Movie: Codable {
   var title: String = ""
   var year: String = ""
   var poster: String = ""
+  var imdbID: String = ""
 }
 
 

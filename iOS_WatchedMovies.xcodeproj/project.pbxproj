@@ -14,6 +14,7 @@
 		DB7F160F265DCE8100063AB0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB7F160D265DCE8100063AB0 /* LaunchScreen.storyboard */; };
 		DB7F1618265DCED000063AB0 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7F1617265DCED000063AB0 /* NetworkManager.swift */; };
 		DB7F161B265DD0E300063AB0 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7F161A265DD0E300063AB0 /* Movie.swift */; };
+		DB7F16202660740B00063AB0 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7F161F2660740B00063AB0 /* CustomTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		DB7F1610265DCE8100063AB0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DB7F1617265DCED000063AB0 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		DB7F161A265DD0E300063AB0 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
+		DB7F161F2660740B00063AB0 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +63,7 @@
 				DB7F1602265DCE7E00063AB0 /* AppDelegate.swift */,
 				DB7F1604265DCE7E00063AB0 /* SceneDelegate.swift */,
 				DB7F1606265DCE7E00063AB0 /* ViewController.swift */,
+				DB7F161F2660740B00063AB0 /* CustomTableViewCell.swift */,
 				DB7F160B265DCE8100063AB0 /* Assets.xcassets */,
 				DB7F160D265DCE8100063AB0 /* LaunchScreen.storyboard */,
 				DB7F1610265DCE8100063AB0 /* Info.plist */,
@@ -139,6 +142,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DB7F16202660740B00063AB0 /* CustomTableViewCell.swift in Sources */,
 				DB7F1618265DCED000063AB0 /* NetworkManager.swift in Sources */,
 				DB7F1607265DCE7E00063AB0 /* ViewController.swift in Sources */,
 				DB7F1603265DCE7E00063AB0 /* AppDelegate.swift in Sources */,

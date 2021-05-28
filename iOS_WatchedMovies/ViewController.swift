@@ -9,16 +9,19 @@ import UIKit
 
 class ViewController: UIViewController {
 
-  //MARK: - Properties
-  var image: UIImageView!
+  //MARK: - View Properties
   var tableView: UITableView!
   
+  //MARK: - Properties
+  var dataSource: [Movie] = []
+  let cache = NSCache<NSString, UIImage>()
   
   //MARK: - View Life Cycle
   override func viewDidLoad() {
     super.viewDidLoad()
     configureUITableView()
     configureMainView()
+    getMovieData(movieName: "minari")
   }
   
   
@@ -31,6 +34,7 @@ class ViewController: UIViewController {
     self.tableView = UITableView(frame: view.bounds)
     self.tableView.delegate = self
     self.tableView.dataSource = self
+    self.tableView.register(CustomTableViewCell.self, forCellReuseIdentifier: CustomTableViewCell.reuseID)
     self.view.addSubview(tableView)
     tableView.translatesAutoresizingMaskIntoConstraints = false
     
@@ -42,33 +46,13 @@ class ViewController: UIViewController {
     ])
   }
   
-  private func configureUIImageView() -> UIImageView {
-    let width = 300
-    let height = 300
-    return UIImageView(frame: CGRect(x: view.center.x - CGFloat(width / 2),
-                                     y: view.center.y - CGFloat(height / 2),
-                                     width: 300,
-                                     height: 300))
-  }
-  
   func getMovieData(movieName: String) {
     NetworkManager.shared.getMovieWithName(name: movieName) { (result) in
       switch result {
       case .success(let movie):
-        print(movie.year)
-        self.getMovieImage(posterLink: movie.poster)
-      case .failure(let error):
-        print(error.rawValue)
-      }
-    }
-  }
-  
-  func getMovieImage(posterLink: String) {
-    NetworkManager.shared.getImage(endpoint: posterLink) { (result) in
-      switch result {
-      case .success(let data):
+        self.dataSource.append(movie)
         DispatchQueue.main.async {
-          self.image.image = UIImage(data: data)
+          self.tableView.reloadData()
         }
       case .failure(let error):
         print(error.rawValue)
@@ -80,11 +64,14 @@ class ViewController: UIViewController {
 //MARK: - UITableView Delegates
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return 1
+    return dataSource.count
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    return UITableViewCell()
+    let cell = tableView.dequeueReusableCell(withIdentifier: CustomTableViewCell.reuseID, for: indexPath) as? CustomTableViewCell
+    let movie = dataSource[indexPath.row]
+    cell?.setCell(movie: movie)
+    return cell!
   }
 }
 
