@@ -14,14 +14,14 @@ class ViewController: UIViewController {
   
   //MARK: - Properties
   var dataSource: [Movie] = []
-  let cache = NSCache<NSString, UIImage>()
+  var totalResults = 0
   
   //MARK: - View Life Cycle
   override func viewDidLoad() {
     super.viewDidLoad()
     configureUITableView()
     configureMainView()
-    getMovieData(movieName: "minari")
+    getMovieData(movieName: "batman")
   }
   
   
@@ -35,6 +35,7 @@ class ViewController: UIViewController {
     self.tableView.delegate = self
     self.tableView.dataSource = self
     self.tableView.register(CustomTableViewCell.self, forCellReuseIdentifier: CustomTableViewCell.reuseID)
+    self.tableView.rowHeight = 60
     self.view.addSubview(tableView)
     tableView.translatesAutoresizingMaskIntoConstraints = false
     
@@ -47,16 +48,20 @@ class ViewController: UIViewController {
   }
   
   func getMovieData(movieName: String) {
-    NetworkManager.shared.getMovieWithName(name: movieName) { (result) in
-      switch result {
-      case .success(let movie):
-        self.dataSource.append(movie)
+    NetworkManager.shared.getMovieWithName(name: movieName) { (results) in
+      switch results {
+      case .success(let search):
+        self.totalResults = Int(search.totalResults) ?? 0
+        for movie in search.movies ?? [] {
+          self.dataSource.append(movie)          
+        }
         DispatchQueue.main.async {
           self.tableView.reloadData()
         }
       case .failure(let error):
         print(error.rawValue)
       }
+      
     }
   }
 }

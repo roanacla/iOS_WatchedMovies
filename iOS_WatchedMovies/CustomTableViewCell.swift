@@ -34,12 +34,11 @@ class CustomTableViewCell: UITableViewCell {
     self.customImageView = UIImageView()
     self.addSubview(customImageView)
     customImageView.translatesAutoresizingMaskIntoConstraints = false
-    customImageView.backgroundColor = .black
     
     NSLayoutConstraint.activate([
-      customImageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 10),
-      customImageView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10),
-      customImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10),
+      customImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
+      customImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
+      customImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
       customImageView.widthAnchor.constraint(equalToConstant: 40),
       customImageView.heightAnchor.constraint(equalToConstant: 40)
     ])
@@ -49,8 +48,8 @@ class CustomTableViewCell: UITableViewCell {
     self.movieLabel = UILabel(frame: .zero)
     self.movieLabel.textAlignment = .left
     self.movieLabel.font = UIFont.systemFont(ofSize: 16, weight: .bold)
-    self.movieLabel.translatesAutoresizingMaskIntoConstraints = false
     self.addSubview(movieLabel)
+    self.movieLabel.translatesAutoresizingMaskIntoConstraints = false
     NSLayoutConstraint.activate([
       movieLabel.leadingAnchor.constraint(equalTo: customImageView.trailingAnchor, constant: 20),
       movieLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20),
