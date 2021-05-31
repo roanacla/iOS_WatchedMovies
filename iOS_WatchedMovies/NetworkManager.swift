@@ -49,13 +49,13 @@ class NetworkManager {
     request.resume()
   }
   
-  func getImage(endpoint: String, completion: @escaping (Result<Data, RequestError>) -> Void) {
-    if let data = cache.object(forKey: NSString(string: endpoint)) {
+  func getImage(for movie: Movie, completion: @escaping (Result<Data, RequestError>) -> Void) {
+    if let data = cache.object(forKey: NSString(string: movie.imdbID)) {
       completion(.success(Data(data)))
       return
     }
     
-    guard let url = URL(string: endpoint) else {
+    guard let url = URL(string: movie.poster) else {
       completion(.failure(.invalidURL))
       return
     }
@@ -68,11 +68,16 @@ class NetworkManager {
         return
       }
       
+      guard let response = response as? HTTPURLResponse, (200...299).contains(response.statusCode) else {
+        completion(.failure(.error))
+        return
+      }
+      
       guard let data = data else {
         completion(.failure(.noData))
         return
       }
-      self.cache.setObject(NSData(data: data), forKey: NSString(string: endpoint))
+      self.cache.setObject(NSData(data: data), forKey: NSString(string: movie.imdbID))
       completion(.success(data))
     }
     request.resume()

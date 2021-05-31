@@ -13,6 +13,7 @@ struct Movie: Codable {
       case title = "Title"
       case year = "Year"
       case poster = "Poster"
+      case imdbID = "imdbID"
   }
   
   var title: String = ""

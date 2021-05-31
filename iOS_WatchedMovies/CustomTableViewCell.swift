@@ -27,7 +27,7 @@ class CustomTableViewCell: UITableViewCell {
   
   func setCell(movie: Movie) {
     movieLabel.text = movie.title
-    getMovieImage(posterLink: movie.poster)
+    getMovieImage(movie: movie)
   }
   
   private func configureImage() {
@@ -57,8 +57,8 @@ class CustomTableViewCell: UITableViewCell {
     ])
   }
   
-  func getMovieImage(posterLink: String) {
-    NetworkManager.shared.getImage(endpoint: posterLink) { (result) in
+  func getMovieImage(movie: Movie) {
+    NetworkManager.shared.getImage(for: movie) { (result) in
       switch result {
       case .success(let data):
         DispatchQueue.main.async {
