@@ -1,34 +1,40 @@
 //
-//  ViewController.swift
+//  DiffableVC.swift
 //  iOS_WatchedMovies
 //
-//  Created by Roger Navarro on 5/25/21.
+//  Created by Roger Navarro on 5/31/21.
 //
 
 import UIKit
 
-class ViewController: UIViewController {
-
+class DiffableVC: UIViewController {
+  
   //MARK: - View Properties
+  enum Section : CaseIterable { case main }
+  
   var tableView: UITableView!
-  
-  //MARK: - Properties
-  var dataSource: [Movie] = []
-  var totalResults = 0
-  var hasMoreResults: Bool {
-    return dataSource.count < totalResults ? true : false
-  }
+  var dataSource: UITableViewDiffableDataSource<Section, Movie>!
+  var movies: [Movie] = []
+  var totalResults: Int = 0
   var currentPage = 1
-  var movieName = "terminator"
+  var movieName = "batman"
+  var hasMoreResults: Bool {
+    return movies.count < totalResults ? true : false
+  }
   
-  //MARK: - View Life Cycle
   override func viewDidLoad() {
     super.viewDidLoad()
     configureUITableView()
+    
     configureMainView()
+    configureDataSource()
     getMovieData(movieName: movieName, page: currentPage)
+    
   }
   
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+  }
   
   //MARK: - Functions
   private func configureMainView() {
@@ -37,10 +43,10 @@ class ViewController: UIViewController {
   
   private func configureUITableView() {
     self.tableView = UITableView(frame: view.bounds)
-    self.tableView.delegate = self
-    self.tableView.dataSource = self
     self.tableView.register(CustomTableViewCell.self, forCellReuseIdentifier: CustomTableViewCell.reuseID)
     self.tableView.rowHeight = 60
+    self.tableView.delegate = self
+    
     self.view.addSubview(tableView)
     tableView.translatesAutoresizingMaskIntoConstraints = false
     
@@ -52,38 +58,40 @@ class ViewController: UIViewController {
     ])
   }
   
+  func configureDataSource() {
+    dataSource = UITableViewDiffableDataSource(tableView: tableView, cellProvider: { (tableView, indexPath, movie) -> UITableViewCell? in
+      let cell = tableView.dequeueReusableCell(withIdentifier: CustomTableViewCell.reuseID, for: indexPath) as? CustomTableViewCell
+      cell?.setCell(movie: movie)
+      return cell!
+    })
+  }
+  
+  func updateDataSource(newMovies: [Movie]) {
+    var newSnapshot = NSDiffableDataSourceSnapshot<Section, Movie>()
+    newSnapshot.appendSections([.main])
+    newSnapshot.appendItems(newMovies)
+    DispatchQueue.main.async {
+      self.dataSource.apply(newSnapshot,animatingDifferences: true)
+    }
+  }
+  
   func getMovieData(movieName: String, page: Int) {
     NetworkManager.shared.getMovieWithName(name: movieName, page: page) { (results) in
       switch results {
       case .success(let search):
         self.totalResults = Int(search.totalResults) ?? 0
-        for movie in search.movies ?? [] {
-          self.dataSource.append(movie)          
-        }
-        DispatchQueue.main.async {
-          self.tableView.reloadData()
-        }
+        self.movies.append(contentsOf: search.movies ?? [])
+        self.updateDataSource(newMovies: self.movies)
       case .failure(let error):
         print(error.rawValue)
       }
       
     }
   }
+  
 }
 
-//MARK: - UITableView Delegates
-extension ViewController: UITableViewDelegate, UITableViewDataSource {
-  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return dataSource.count
-  }
-  
-  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: CustomTableViewCell.reuseID, for: indexPath) as? CustomTableViewCell
-    let movie = dataSource[indexPath.row]
-    cell?.setCell(movie: movie)
-    return cell!
-  }
-  
+extension DiffableVC: UITableViewDelegate {
   func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
     if hasMoreResults {
       currentPage += 1
@@ -91,4 +99,3 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     }
   }
 }
-

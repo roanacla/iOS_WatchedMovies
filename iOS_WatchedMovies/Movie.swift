@@ -8,7 +8,7 @@
 import Foundation
 
 
-struct Movie: Codable {
+struct Movie: Codable, Hashable {
   enum CodingKeys: String, CodingKey {
       case title = "Title"
       case year = "Year"
