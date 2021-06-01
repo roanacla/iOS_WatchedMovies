@@ -70,6 +70,22 @@
 			path = Screens;
 			sourceTree = "<group>";
 		};
+		DB57C0C22665BA9200BD62AC /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				DB7F1617265DCED000063AB0 /* NetworkManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		DB57C0C32665BAAB00BD62AC /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				DB7F161A265DD0E300063AB0 /* Movie.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		DB7F15F6265DCE7E00063AB0 = {
 			isa = PBXGroup;
 			children = (
@@ -89,6 +105,8 @@
 		DB7F1601265DCE7E00063AB0 /* iOS_WatchedMovies */ = {
 			isa = PBXGroup;
 			children = (
+				DB57C0C32665BAAB00BD62AC /* Model */,
+				DB57C0C22665BA9200BD62AC /* Managers */,
 				DB57C0BD2665705800BD62AC /* Screens */,
 				DB57C0B726656ECE00BD62AC /* Custom Views */,
 				DB7F1602265DCE7E00063AB0 /* AppDelegate.swift */,
@@ -97,8 +115,6 @@
 				DB7F160B265DCE8100063AB0 /* Assets.xcassets */,
 				DB7F160D265DCE8100063AB0 /* LaunchScreen.storyboard */,
 				DB7F1610265DCE8100063AB0 /* Info.plist */,
-				DB7F1617265DCED000063AB0 /* NetworkManager.swift */,
-				DB7F161A265DD0E300063AB0 /* Movie.swift */,
 			);
 			path = iOS_WatchedMovies;
 			sourceTree = "<group>";

@@ -58,6 +58,7 @@ class CustomTableViewCell: UITableViewCell {
   }
   
   func getMovieImage(movie: Movie) {
+    customImageView.image = nil
     NetworkManager.shared.getImage(for: movie) { (result) in
       switch result {
       case .success(let data):

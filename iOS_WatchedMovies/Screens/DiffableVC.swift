@@ -17,7 +17,7 @@ class DiffableVC: UIViewController {
   var movies: [Movie] = []
   var totalResults: Int = 0
   var currentPage = 1
-  var movieName = "batman"
+  var movieName = "avengers"
   var hasMoreResults: Bool {
     return movies.count < totalResults ? true : false
   }
