@@ -62,6 +62,7 @@ class CommonVC: UIViewController {
     navigationItem.searchController = searchController
   }
   
+  //MARK: - Data functions
   func getMovieData(movieName: String, page: Int) {
     NetworkManager.shared.getMovieWithName(name: movieName, page: page) { (results) in
       switch results {
@@ -78,6 +79,12 @@ class CommonVC: UIViewController {
       }
       
     }
+  }
+  
+  //MARK: - Functions
+  func markAsFavorite(movie: Movie?) {
+    guard let movie = movie else { return }
+    print(movie)
   }
 }
 
@@ -104,6 +111,19 @@ extension CommonVC: UITableViewDelegate, UITableViewDataSource {
       currentPage += 1
       self.getMovieData(movieName: movieName, page: currentPage)
     }
+  }
+  
+  func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+    let favoriteAction = UIContextualAction(style: .normal,
+                                            title: "Mark as favorite") { [weak self] (action, view, completion) in
+      let movie = self?.dataSource[indexPath.row]
+      self?.markAsFavorite(movie: movie)
+      completion(true)
+    }
+    favoriteAction.backgroundColor = .systemGreen
+    let conf = UISwipeActionsConfiguration(actions: [favoriteAction])
+    
+    return conf
   }
 }
 
