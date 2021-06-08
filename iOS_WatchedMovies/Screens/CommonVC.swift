@@ -19,18 +19,18 @@ class CommonVC: UIViewController {
     return dataSource.count < totalResults ? true : false
   }
   var currentPage = 1
-  var movieName = "batman"
+  var movieName = ""
   
   //MARK: - View Life Cycle
   override func viewDidLoad() {
     super.viewDidLoad()
     configureUITableView()
     configureMainView()
-    getMovieData(movieName: movieName, page: currentPage)
+    configureSearchBar()
   }
   
   
-  //MARK: - Functions
+  //MARK: - Configure View
   private func configureMainView() {
     self.view.backgroundColor = .systemBackground
   }
@@ -50,6 +50,16 @@ class CommonVC: UIViewController {
       tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
       tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
     ])
+  }
+  
+  private func configureSearchBar() {
+    let searchController = UISearchController()
+    searchController.searchBar.placeholder = "Search by movie title"
+    searchController.searchBar.searchTextField.delegate = self
+    searchController.obscuresBackgroundDuringPresentation = false
+    searchController.searchBar.delegate = self
+    
+    navigationItem.searchController = searchController
   }
   
   func getMovieData(movieName: String, page: Int) {
@@ -85,10 +95,33 @@ extension CommonVC: UITableViewDelegate, UITableViewDataSource {
   }
   
   func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-    if hasMoreResults {
+    let offsetY         = scrollView.contentOffset.y
+    let contentHeight   = scrollView.contentSize.height
+    let height          = scrollView.frame.size.height
+    
+    if offsetY > contentHeight - height {
+      guard hasMoreResults else { return }
       currentPage += 1
-      getMovieData(movieName: movieName, page: currentPage)
+      self.getMovieData(movieName: movieName, page: currentPage)
     }
   }
 }
 
+//MARK: - UISearch
+extension CommonVC: UITextFieldDelegate {
+  func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    let text = textField.text ?? ""
+    movieName = text
+    currentPage = 1
+    dataSource.removeAll()
+    getMovieData(movieName: text, page: currentPage)
+    return true
+  }
+}
+
+extension CommonVC: UISearchBarDelegate {
+  func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+    self.dataSource.removeAll()
+    tableView.reloadData()
+  }
+}
