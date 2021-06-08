@@ -106,6 +106,7 @@ extension CommCollVC: UISearchBarDelegate {
   func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
     print("Search")
     currentPage = 1
+    movies.removeAll()
     movieName = searchBar.text ?? ""
     requestData(movieName: movieName, page: currentPage) {
       DispatchQueue.main.async {

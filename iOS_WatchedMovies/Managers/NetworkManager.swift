@@ -18,6 +18,7 @@ class NetworkManager {
   
   static let shared = NetworkManager()
   private var baseURL = "https://www.omdbapi.com/?apikey=40ecf6b5&s="
+  private var pageURL = "&page="
   private let session = URLSession.shared
   let cache = NSCache<NSString, NSData>()
   
@@ -25,28 +26,35 @@ class NetworkManager {
   
   func getMovieWithName(name: String, page: Int = 1, completion: @escaping (Result<Search,RequestError>) -> ()) {
     let name = name.replacingOccurrences(of: " ", with: "+")
-    let pageURL = "&page=\(page)"
-    let completeURL = baseURL + name + pageURL
-    guard let endPoint = URL(string: completeURL) else {
+    let urlString = baseURL + name + pageURL + "\(page)"
+    guard let url = URL(string: urlString) else {
       completion(.failure(.invalidURL))
       return
     }
-    
-    let request = session.dataTask(with: endPoint) { (data, response, error) in
-      guard let data = data else { completion(.failure(.noData)); return }
+    URLSession.shared.dataTask(with: url) { (data, response, error) in
+      if let _ = error {
+        completion(.failure(.error))
+        return
+      }
+      
+      guard let response = response as? HTTPURLResponse, (200...299).contains(response.statusCode) else {
+        completion(.failure(.error))
+        return
+      }
+      
+      guard let data = data else {
+        completion(.failure(.noData))
+        return
+      }
       
       do {
         let decoder = JSONDecoder()
-//        decoder.keyDecodingStrategy = .useDefaultKeys
-        let searchResult = try decoder.decode(Search.self, from: data)
-        completion(.success(searchResult))
+        let search = try decoder.decode(Search.self, from: data)
+        completion(.success(search))
       } catch {
-        print("🔴")
-        print(error.localizedDescription)
+        completion(.failure(.error))
       }
-    }
-    
-    request.resume()
+    }.resume()
   }
   
   func getImage(for movie: Movie, completion: @escaping (Result<Data, RequestError>) -> Void) {
