@@ -52,7 +52,7 @@ class CollectionVC: UIViewController {
   
   //MARK: - Views Configuration
   func configureCollectionView() {
-    collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: self.createThreeColumnFlowLayout(in: view))
+    collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: CollectionViewLayout.createThreeColumnFlowLayout(in: view))
     view.addSubview(collectionView)
     collectionView.delegate = self
     collectionView.register(CollectionViewCell.self, forCellWithReuseIdentifier: CollectionViewCell.reuseID)
@@ -64,20 +64,6 @@ class CollectionVC: UIViewController {
       collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
       collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
     ])
-  }
-  
-  func createThreeColumnFlowLayout(in view: UIView) -> UICollectionViewFlowLayout {
-      let width                       = view.bounds.width
-      let padding: CGFloat            = 12
-      let minimumItemSpacing: CGFloat = 10
-      let availableWidth              = width - (padding * 2) - (minimumItemSpacing * 2)
-      let itemWidth                   = availableWidth / 3
-      
-      let flowLayout                  = UICollectionViewFlowLayout()
-      flowLayout.sectionInset         = UIEdgeInsets(top: padding, left: padding, bottom: padding, right: padding)
-      flowLayout.itemSize             = CGSize(width: itemWidth, height: itemWidth + 40)
-      
-      return flowLayout
   }
   
   //MARK - Deffiable data source

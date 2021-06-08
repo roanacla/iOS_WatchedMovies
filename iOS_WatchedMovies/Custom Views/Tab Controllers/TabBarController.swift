@@ -14,7 +14,7 @@ class TabBarController: UITabBarController {
 
       UITabBar.appearance().tintColor = .systemGreen
       
-      viewControllers                 = [createCommonNC(), createDiffableNC(), createCollectionNC(), createFavoritiesNC()]
+      viewControllers = [createCommonNC(), createCommCollVC(), createDiffableNC(), createCollectionNC(), createFavoritiesNC()]
     }
     
   func createCommonNC() -> UINavigationController {
@@ -25,11 +25,19 @@ class TabBarController: UITabBarController {
       return UINavigationController(rootViewController: commonVC)
   }
   
+  func createCommCollVC() -> UINavigationController {
+    let commCollVC = CommCollVC()
+    commCollVC.title = "Common Collection"
+    commCollVC.tabBarItem = UITabBarItem(tabBarSystemItem: .bookmarks, tag: 1)
+    
+    return UINavigationController(rootViewController: commCollVC)
+  }
+  
   
   func createDiffableNC() -> UINavigationController {
       let diffableVC         = DiffableVC()
       diffableVC.title       = "Diffable"
-      diffableVC.tabBarItem  = UITabBarItem(tabBarSystemItem: .favorites, tag: 1)
+      diffableVC.tabBarItem  = UITabBarItem(tabBarSystemItem: .favorites, tag: 2)
       
       return UINavigationController(rootViewController: diffableVC)
   }
@@ -37,7 +45,7 @@ class TabBarController: UITabBarController {
   func createCollectionNC() -> UINavigationController {
     let collectionVC = CollectionVC()
     collectionVC.title = "Collection"
-    collectionVC.tabBarItem = UITabBarItem(tabBarSystemItem: .mostViewed, tag: 2)
+    collectionVC.tabBarItem = UITabBarItem(tabBarSystemItem: .mostViewed, tag: 3)
     
     return UINavigationController(rootViewController: collectionVC)
   }
@@ -45,7 +53,7 @@ class TabBarController: UITabBarController {
   func createFavoritiesNC() -> UINavigationController {
     let favoritesVC = FavoritesVC()
     favoritesVC.title = "Favorites"
-    favoritesVC.tabBarItem = UITabBarItem(tabBarSystemItem: .favorites, tag: 3)
+    favoritesVC.tabBarItem = UITabBarItem(tabBarSystemItem: .favorites, tag: 4)
     
     return UINavigationController(rootViewController: favoritesVC)
   }
