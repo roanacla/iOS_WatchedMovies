@@ -11,6 +11,7 @@
 		DB57C0BF2665708A00BD62AC /* DiffableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB57C0BE2665708A00BD62AC /* DiffableVC.swift */; };
 		DB57C0C62665BBBB00BD62AC /* CollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB57C0C52665BBBB00BD62AC /* CollectionVC.swift */; };
 		DB57C0C92665BF9100BD62AC /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB57C0C82665BF9100BD62AC /* CollectionViewCell.swift */; };
+		DB5D20B3266EEE3800E12EE1 /* FavoritesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5D20B2266EEE3800E12EE1 /* FavoritesVC.swift */; };
 		DB7F1603265DCE7E00063AB0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7F1602265DCE7E00063AB0 /* AppDelegate.swift */; };
 		DB7F1605265DCE7E00063AB0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7F1604265DCE7E00063AB0 /* SceneDelegate.swift */; };
 		DB7F1607265DCE7E00063AB0 /* CommonVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7F1606265DCE7E00063AB0 /* CommonVC.swift */; };
@@ -26,6 +27,7 @@
 		DB57C0BE2665708A00BD62AC /* DiffableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiffableVC.swift; sourceTree = "<group>"; };
 		DB57C0C52665BBBB00BD62AC /* CollectionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionVC.swift; sourceTree = "<group>"; };
 		DB57C0C82665BF9100BD62AC /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
+		DB5D20B2266EEE3800E12EE1 /* FavoritesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesVC.swift; sourceTree = "<group>"; };
 		DB7F15FF265DCE7E00063AB0 /* iOS_WatchedMovies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOS_WatchedMovies.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB7F1602265DCE7E00063AB0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DB7F1604265DCE7E00063AB0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -72,6 +74,7 @@
 				DB7F1606265DCE7E00063AB0 /* CommonVC.swift */,
 				DB57C0BE2665708A00BD62AC /* DiffableVC.swift */,
 				DB57C0C52665BBBB00BD62AC /* CollectionVC.swift */,
+				DB5D20B2266EEE3800E12EE1 /* FavoritesVC.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -202,6 +205,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DB5D20B3266EEE3800E12EE1 /* FavoritesVC.swift in Sources */,
 				DB57C0C92665BF9100BD62AC /* CollectionViewCell.swift in Sources */,
 				DB7F16202660740B00063AB0 /* CustomTableViewCell.swift in Sources */,
 				DB57C0C62665BBBB00BD62AC /* CollectionVC.swift in Sources */,
