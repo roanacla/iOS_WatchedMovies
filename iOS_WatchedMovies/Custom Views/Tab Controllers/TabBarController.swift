@@ -14,7 +14,7 @@ class TabBarController: UITabBarController {
 
       UITabBar.appearance().tintColor = .systemGreen
       
-      viewControllers                 = [createCommonNC(), createDiffableNC()]
+      viewControllers                 = [createCommonNC(), createDiffableNC(), createCollectionNC()]
     }
     
   func createCommonNC() -> UINavigationController {
@@ -32,6 +32,14 @@ class TabBarController: UITabBarController {
       diffableVC.tabBarItem  = UITabBarItem(tabBarSystemItem: .favorites, tag: 1)
       
       return UINavigationController(rootViewController: diffableVC)
+  }
+  
+  func createCollectionNC() -> UINavigationController {
+    let collectionVC = CollectionVC()
+    collectionVC.title = "Collection"
+    collectionVC.tabBarItem = UITabBarItem(tabBarSystemItem: .mostViewed, tag: 2)
+    
+    return UINavigationController(rootViewController: collectionVC)
   }
 
 }
