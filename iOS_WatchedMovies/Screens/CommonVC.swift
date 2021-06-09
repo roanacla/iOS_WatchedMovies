@@ -125,6 +125,12 @@ extension CommonVC: UITableViewDelegate, UITableViewDataSource {
     
     return conf
   }
+  
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    let movie = dataSource[indexPath.row]
+    let movieDetailVC = MovieDetailRouter.setupModule(for: movie)
+    navigationController?.pushViewController(movieDetailVC, animated: true)
+  }
 }
 
 //MARK: - UISearch

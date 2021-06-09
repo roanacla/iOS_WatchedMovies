@@ -11,6 +11,7 @@ import UIKit
 enum RequestError: String, Error {
   case noData = "No data received"
   case error = "Error with request"
+  case errorResponse = "No response"
   case invalidURL = "Invalid URL"
 }
 
@@ -19,6 +20,7 @@ class NetworkManager {
   static let shared = NetworkManager()
   private var baseURL = "https://www.omdbapi.com/?apikey=40ecf6b5&s="
   private var pageURL = "&page="
+  private var byIDURL = "https://www.omdbapi.com/?apikey=40ecf6b5&i="
   private let session = URLSession.shared
   let cache = NSCache<NSString, NSData>()
   
@@ -53,6 +55,38 @@ class NetworkManager {
         completion(.success(search))
       } catch {
         completion(.failure(.error))
+      }
+    }.resume()
+  }
+  
+  func getMovieByID(id: String, completion: @escaping (Result<MovieDetail, RequestError>) -> Void) {
+    let stringURL = byIDURL + id
+    guard let url = URL(string: stringURL) else {
+      completion(.failure(.invalidURL))
+      return
+    }
+    
+    URLSession.shared.dataTask(with: url) { (data, response, error) in
+      if let _ = error {
+        completion(.failure(.error))
+      }
+      
+      guard let response = response as? HTTPURLResponse, (200...299).contains(response.statusCode) else {
+        completion(.failure(.errorResponse))
+        return
+      }
+      
+      guard let data = data else {
+        completion(.failure(.noData))
+        return
+      }
+      
+      do {
+        let decoder = JSONDecoder()
+        let movieDetail = try decoder.decode(MovieDetail.self, from: data)
+        completion(.success(movieDetail))
+      } catch {
+        print("🔴 Error decoding movie")
       }
     }.resume()
   }
