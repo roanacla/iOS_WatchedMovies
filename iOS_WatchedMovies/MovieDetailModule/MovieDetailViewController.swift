@@ -10,6 +10,9 @@ import UIKit
 
 protocol MovieDetailViewControllerInterface: class {
   func setMovieTitle(with title: String)
+  func setMovieYear(with year: String)
+  func setMoviePoster(with data: Data)
+  func setMoviePlot(with plot: String)
 }
 
 class MovieDetailViewController: UIViewController {
@@ -26,6 +29,7 @@ class MovieDetailViewController: UIViewController {
   //MARK: - View Life Cycle
   override func viewDidLoad() {
     super.viewDidLoad()
+    presenter?.notifyViewLoaded()
   }
   
   //MARK: - IBActions
@@ -38,9 +42,24 @@ class MovieDetailViewController: UIViewController {
 }
 
 extension MovieDetailViewController: MovieDetailViewControllerInterface {
+  
   func setMovieTitle(with title: String) {
     nameLabel.text = title
   }
   
+  func setMovieYear(with year: String) {
+    yearLabel.text = year
+  }
   
+  func setMoviePoster(with data: Data) {
+    DispatchQueue.main.async {
+      self.imageView.image = UIImage(data: data)
+    }
+  }
+  
+  func setMoviePlot(with plot: String) {
+    DispatchQueue.main.async {
+      self.plotLabel.text = plot
+    }
+  }
 }

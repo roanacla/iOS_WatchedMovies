@@ -21,7 +21,7 @@ class MovieDetailRouter: NSObject {
     let vc = MovieDetailViewController()
     let interactor = MovieDetailInteractor()
     let router = MovieDetailRouter()
-    let presenter = MovieDetailPresenter(interactor: interactor, router: router, view: vc)
+    let presenter = MovieDetailPresenter(interactor: interactor, router: router, view: vc, movie: movie)
     
     vc.presenter = presenter
     router.presenter = presenter

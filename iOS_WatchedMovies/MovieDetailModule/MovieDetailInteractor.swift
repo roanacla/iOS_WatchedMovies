@@ -9,6 +9,8 @@
 import Foundation
 
 protocol MovieDetailInteractorInterface: class {
+  func fetchMovieDetail(imdbID: String)
+  func fetchMoviePoster(movie: Movie)
   
 }
 
@@ -17,14 +19,25 @@ class MovieDetailInteractor {
 }
 
 extension MovieDetailInteractor: MovieDetailInteractorInterface {
-//  func fetchMovie() {
-//    NetworkManager.shared.getMovieByID(id: self.imdbID) { (result) in
-//      switch result {
-//      case .success(let movieDetail):
-//        self.movieDetail = movieDetail
-//      case .failure(let error):
-//        print("🔴" + error.rawValue)
-//      }
-//    }
-//  }
+  func fetchMovieDetail(imdbID: String) {
+    NetworkManager.shared.getMovieByID(id: imdbID) { (result) in
+      switch result {
+      case .success(let movieDetail):
+        self.presenter?.movieDetailFetched(movieDetail: movieDetail)
+      case .failure(let error):
+        print("🔴" + error.rawValue)
+      }
+    }
+  }
+  
+  func fetchMoviePoster(movie: Movie) {
+    NetworkManager.shared.getImage(for: movie) { (result) in
+      switch result {
+      case .success(let data):
+        self.presenter?.moviePosterFetched(data: data)
+      case .failure(let error):
+        print("🔴" + error.rawValue)
+      }
+    }
+  }
 }
