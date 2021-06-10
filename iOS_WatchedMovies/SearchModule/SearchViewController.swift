@@ -25,8 +25,8 @@ class SearchViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     self.presenter?.notifyViewDidLoad()
-    self.configureUITableView()
     self.configureSearchBar()
+    self.configureUITableView()
   }
   
   //MARK: - Configure View

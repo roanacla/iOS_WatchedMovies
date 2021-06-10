@@ -12,7 +12,7 @@
 		DB57C0C62665BBBB00BD62AC /* CollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB57C0C52665BBBB00BD62AC /* CollectionVC.swift */; };
 		DB57C0C92665BF9100BD62AC /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB57C0C82665BF9100BD62AC /* CollectionViewCell.swift */; };
 		DB5D20B3266EEE3800E12EE1 /* FavoritesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5D20B2266EEE3800E12EE1 /* FavoritesVC.swift */; };
-		DB5D20B6266FD1E000E12EE1 /* CommCollVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5D20B5266FD1E000E12EE1 /* CommCollVC.swift */; };
+		DB5D20B6266FD1E000E12EE1 /* ToWatchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5D20B5266FD1E000E12EE1 /* ToWatchVC.swift */; };
 		DB5D20B9266FD39200E12EE1 /* CollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5D20B8266FD39200E12EE1 /* CollectionViewLayout.swift */; };
 		DB5D20CE2670371A00E12EE1 /* MovieDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DB5D20CD2670371A00E12EE1 /* MovieDetailView.xib */; };
 		DB5D20E82670815300E12EE1 /* MovieDetailRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5D20E42670815300E12EE1 /* MovieDetailRouter.swift */; };
@@ -42,7 +42,7 @@
 		DB57C0C52665BBBB00BD62AC /* CollectionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionVC.swift; sourceTree = "<group>"; };
 		DB57C0C82665BF9100BD62AC /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		DB5D20B2266EEE3800E12EE1 /* FavoritesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesVC.swift; sourceTree = "<group>"; };
-		DB5D20B5266FD1E000E12EE1 /* CommCollVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommCollVC.swift; sourceTree = "<group>"; };
+		DB5D20B5266FD1E000E12EE1 /* ToWatchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToWatchVC.swift; sourceTree = "<group>"; };
 		DB5D20B8266FD39200E12EE1 /* CollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewLayout.swift; sourceTree = "<group>"; };
 		DB5D20CD2670371A00E12EE1 /* MovieDetailView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MovieDetailView.xib; sourceTree = "<group>"; };
 		DB5D20E42670815300E12EE1 /* MovieDetailRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieDetailRouter.swift; sourceTree = "<group>"; };
@@ -100,7 +100,7 @@
 		DB57C0BD2665705800BD62AC /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				DB5D20B5266FD1E000E12EE1 /* CommCollVC.swift */,
+				DB5D20B5266FD1E000E12EE1 /* ToWatchVC.swift */,
 				DB57C0BE2665708A00BD62AC /* DiffableVC.swift */,
 				DB57C0C52665BBBB00BD62AC /* CollectionVC.swift */,
 				DB5D20B2266EEE3800E12EE1 /* FavoritesVC.swift */,
@@ -279,7 +279,7 @@
 				DB7F16202660740B00063AB0 /* CustomTableViewCell.swift in Sources */,
 				DB5D20EA2670815300E12EE1 /* MovieDetailInteractor.swift in Sources */,
 				DB5D20F22670819100E12EE1 /* SearchPresenter.swift in Sources */,
-				DB5D20B6266FD1E000E12EE1 /* CommCollVC.swift in Sources */,
+				DB5D20B6266FD1E000E12EE1 /* ToWatchVC.swift in Sources */,
 				DB57C0C62665BBBB00BD62AC /* CollectionVC.swift in Sources */,
 				DB5D20F7267098FE00E12EE1 /* MovieDetail.swift in Sources */,
 				DB57C0BF2665708A00BD62AC /* DiffableVC.swift in Sources */,

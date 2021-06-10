@@ -14,21 +14,21 @@ class TabBarController: UITabBarController {
     
     UITabBar.appearance().tintColor = .systemGreen
     
-    viewControllers = [createSearchNC(), createCommCollVC(), createDiffableNC(), createCollectionNC(), createFavoritiesNC()]
+    viewControllers = [createSearchNC(), createToWatchNC()]
   }
   
   func createSearchNC() -> UINavigationController {
     let SearchVC        = SearchRouter.setupModule()
-    SearchVC.title      = "Common"
+    SearchVC.title      = "Search"
     SearchVC.tabBarItem = UITabBarItem(tabBarSystemItem: .search, tag: 0)
     
     return UINavigationController(rootViewController: SearchVC)
   }
   
-  func createCommCollVC() -> UINavigationController {
-    let commCollVC = CommCollVC()
-    commCollVC.title = "Common Collection"
-    commCollVC.tabBarItem = UITabBarItem(tabBarSystemItem: .bookmarks, tag: 1)
+  func createToWatchNC() -> UINavigationController {
+    let commCollVC = ToWatchVC()
+    commCollVC.title = "To Watch"
+    commCollVC.tabBarItem = UITabBarItem.init(title: "To watch", image: UIImage(systemName: "list.number"), tag: 1)
     
     return UINavigationController(rootViewController: commCollVC)
   }
