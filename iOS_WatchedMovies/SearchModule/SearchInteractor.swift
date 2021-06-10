@@ -9,7 +9,8 @@
 import Foundation
 
 protocol SearchInteractorInterface: class {
-
+  //Input
+  func fetchMovies(with name: String, page: Int)
 }
 
 class SearchInteractor {
@@ -17,5 +18,17 @@ class SearchInteractor {
 }
 
 extension SearchInteractor: SearchInteractorInterface {
-
+  //MARK: - Input
+  func fetchMovies(with name: String, page: Int){
+    NetworkManager.shared.getMovieWithName(name: name, page: page) { (results) in
+      switch results {
+      case .success(let search):
+        let totalResult = Int(search.totalResults) ?? 0
+        self.presenter?.setTotalResults(totalResult)
+        self.presenter?.appendMovies(search.movies ?? [])
+      case .failure(let error):
+        print(error.rawValue)
+      }
+    }
+  }
 }

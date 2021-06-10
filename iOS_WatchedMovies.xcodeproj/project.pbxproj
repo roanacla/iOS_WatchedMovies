@@ -29,7 +29,6 @@
 		DB5D21052671910700E12EE1 /* DataFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5D21042671910700E12EE1 /* DataFileManager.swift */; };
 		DB7F1603265DCE7E00063AB0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7F1602265DCE7E00063AB0 /* AppDelegate.swift */; };
 		DB7F1605265DCE7E00063AB0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7F1604265DCE7E00063AB0 /* SceneDelegate.swift */; };
-		DB7F1607265DCE7E00063AB0 /* CommonVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7F1606265DCE7E00063AB0 /* CommonVC.swift */; };
 		DB7F160C265DCE8100063AB0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB7F160B265DCE8100063AB0 /* Assets.xcassets */; };
 		DB7F160F265DCE8100063AB0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB7F160D265DCE8100063AB0 /* LaunchScreen.storyboard */; };
 		DB7F1618265DCED000063AB0 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7F1617265DCED000063AB0 /* NetworkManager.swift */; };
@@ -61,7 +60,6 @@
 		DB7F15FF265DCE7E00063AB0 /* iOS_WatchedMovies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOS_WatchedMovies.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB7F1602265DCE7E00063AB0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DB7F1604265DCE7E00063AB0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		DB7F1606265DCE7E00063AB0 /* CommonVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonVC.swift; sourceTree = "<group>"; };
 		DB7F160B265DCE8100063AB0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DB7F160E265DCE8100063AB0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DB7F1610265DCE8100063AB0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -102,7 +100,6 @@
 		DB57C0BD2665705800BD62AC /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				DB7F1606265DCE7E00063AB0 /* CommonVC.swift */,
 				DB5D20B5266FD1E000E12EE1 /* CommCollVC.swift */,
 				DB57C0BE2665708A00BD62AC /* DiffableVC.swift */,
 				DB57C0C52665BBBB00BD62AC /* CollectionVC.swift */,
@@ -287,7 +284,6 @@
 				DB5D20F7267098FE00E12EE1 /* MovieDetail.swift in Sources */,
 				DB57C0BF2665708A00BD62AC /* DiffableVC.swift in Sources */,
 				DB7F1618265DCED000063AB0 /* NetworkManager.swift in Sources */,
-				DB7F1607265DCE7E00063AB0 /* CommonVC.swift in Sources */,
 				DB7F1603265DCE7E00063AB0 /* AppDelegate.swift in Sources */,
 				DB5D20EB2670815300E12EE1 /* MovieDetailPresenter.swift in Sources */,
 				DB5D20FB267099F900E12EE1 /* Search.swift in Sources */,

@@ -8,21 +8,21 @@
 import UIKit
 
 class TabBarController: UITabBarController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-      UITabBar.appearance().tintColor = .systemGreen
-      
-      viewControllers = [createCommonNC(), createCommCollVC(), createDiffableNC(), createCollectionNC(), createFavoritiesNC()]
-    }
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
     
-  func createCommonNC() -> UINavigationController {
-      let commonVC        = CommonVC()
-      commonVC.title      = "Common"
-      commonVC.tabBarItem = UITabBarItem(tabBarSystemItem: .search, tag: 0)
-      
-      return UINavigationController(rootViewController: commonVC)
+    UITabBar.appearance().tintColor = .systemGreen
+    
+    viewControllers = [createSearchNC(), createCommCollVC(), createDiffableNC(), createCollectionNC(), createFavoritiesNC()]
+  }
+  
+  func createSearchNC() -> UINavigationController {
+    let SearchVC        = SearchRouter.setupModule()
+    SearchVC.title      = "Common"
+    SearchVC.tabBarItem = UITabBarItem(tabBarSystemItem: .search, tag: 0)
+    
+    return UINavigationController(rootViewController: SearchVC)
   }
   
   func createCommCollVC() -> UINavigationController {
@@ -35,11 +35,11 @@ class TabBarController: UITabBarController {
   
   
   func createDiffableNC() -> UINavigationController {
-      let diffableVC         = DiffableVC()
-      diffableVC.title       = "Diffable"
-      diffableVC.tabBarItem  = UITabBarItem(tabBarSystemItem: .favorites, tag: 2)
-      
-      return UINavigationController(rootViewController: diffableVC)
+    let diffableVC         = DiffableVC()
+    diffableVC.title       = "Diffable"
+    diffableVC.tabBarItem  = UITabBarItem(tabBarSystemItem: .favorites, tag: 2)
+    
+    return UINavigationController(rootViewController: diffableVC)
   }
   
   func createCollectionNC() -> UINavigationController {
@@ -57,5 +57,5 @@ class TabBarController: UITabBarController {
     
     return UINavigationController(rootViewController: favoritesVC)
   }
-
+  
 }
