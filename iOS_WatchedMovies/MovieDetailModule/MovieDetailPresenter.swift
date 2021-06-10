@@ -12,6 +12,7 @@ protocol MovieDetailPresenterInterface: class {
   func notifyViewLoaded()
   func movieDetailFetched(movieDetail: MovieDetail)
   func moviePosterFetched(data: Data)
+  func notifySaveInToWatchList()
 }
 
 class MovieDetailPresenter {
@@ -30,7 +31,7 @@ class MovieDetailPresenter {
 }
 
 extension MovieDetailPresenter: MovieDetailPresenterInterface {
-  //MARK: - To Interactor
+  
   func notifyViewLoaded() {
     interactor?.fetchMovieDetail(imdbID: movie.imdbID)
     interactor?.fetchMoviePoster(movie: movie)
@@ -38,7 +39,6 @@ extension MovieDetailPresenter: MovieDetailPresenterInterface {
     view.setMovieYear(with: movie.year)
   }
   
-  //MARK: - To View
   func movieDetailFetched(movieDetail: MovieDetail) {
     view.setMoviePlot(with: movieDetail.plot)
   }
@@ -47,5 +47,7 @@ extension MovieDetailPresenter: MovieDetailPresenterInterface {
     view.setMoviePoster(with: data)
   }
   
-  
+  func notifySaveInToWatchList() {
+    interactor?.storeMovieDetail()
+  }
 }

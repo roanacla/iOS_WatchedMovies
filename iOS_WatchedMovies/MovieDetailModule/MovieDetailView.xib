@@ -34,14 +34,20 @@
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AeB-9H-k6F">
                             <rect key="frame" x="0.0" y="0.0" width="187.66666666666666" height="80"/>
-                            <state key="normal" title="Button"/>
+                            <color key="backgroundColor" red="0.27060466999999999" green="0.4333130717" blue="0.59727638959999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <state key="normal" title="To watch">
+                                <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
                             <connections>
                                 <action selector="saveInToWatchList:" destination="-1" eventType="touchUpInside" id="5SF-PH-zNJ"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sKe-FU-06e">
                             <rect key="frame" x="187.66666666666663" y="0.0" width="187.33333333333337" height="80"/>
-                            <state key="normal" title="Button"/>
+                            <color key="backgroundColor" red="0.59999999999999998" green="0.80000000000000004" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                            <state key="normal" title="Watched">
+                                <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
                             <connections>
                                 <action selector="saveInWatchedList:" destination="-1" eventType="touchUpInside" id="goc-lk-o3m"/>
                             </connections>

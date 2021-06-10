@@ -29,6 +29,8 @@ class MovieDetailViewController: UIViewController {
   //MARK: - View Life Cycle
   override func viewDidLoad() {
     super.viewDidLoad()
+    imageView.layer.cornerRadius = 0.5
+    imageView.clipsToBounds = true
     presenter?.notifyViewLoaded()
   }
   
@@ -37,6 +39,7 @@ class MovieDetailViewController: UIViewController {
   }
   
   @IBAction func saveInToWatchList(_ sender: Any) {
+    presenter?.notifySaveInToWatchList()
   }
   
 }
@@ -62,4 +65,5 @@ extension MovieDetailViewController: MovieDetailViewControllerInterface {
       self.plotLabel.text = plot
     }
   }
+
 }
