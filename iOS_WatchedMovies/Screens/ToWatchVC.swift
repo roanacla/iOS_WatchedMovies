@@ -10,27 +10,35 @@ import CoreData
 
 class ToWatchVC: UIViewController {
   
+  enum Section: CaseIterable {case main}
   
   //MARK: - View Components
   var collectionView: UICollectionView!
   
   //MARK: - Properties
-  var movies: [Entity] = []
-  var movieName: String = ""
-  var currentPage: Int = 1
-  var totalResults: Int = 0
-  var hasMoreResults: Bool {
-    return movies.count < totalResults ? true : false
-  }
+  var dataSource: UICollectionViewDiffableDataSource<String, NSManagedObjectID>!
   var coreDataStack: CoreDataStack {
     (UIApplication.shared.delegate as! AppDelegate).coreDataStack
   }
+  lazy var fetchedResultsController: NSFetchedResultsController<Entity> = {
+    let fetchRequest: NSFetchRequest<Entity> = Entity.fetchRequest()
+    let sortByYear = NSSortDescriptor(key: #keyPath(Entity.year), ascending: false)
+    fetchRequest.sortDescriptors = [sortByYear]
+    let fetchedResultsController = NSFetchedResultsController(
+      fetchRequest: fetchRequest,
+      managedObjectContext: coreDataStack.managedContext,
+      sectionNameKeyPath: nil,
+      cacheName: "toWatchList")
+
+    fetchedResultsController.delegate = self
+    return fetchedResultsController
+  }()
   
   //MARK: - View Life Cycle
   override func viewDidLoad() {
     super.viewDidLoad()
-    fetchDataFromCoreData()
     configureCollectionView()
+    configureDataSource()
   }
   
   override func viewDidAppear(_ animated: Bool) {
@@ -38,19 +46,10 @@ class ToWatchVC: UIViewController {
   }
   
   //MARK: - View Conf Functions
-  
-  func configureSearchBar() {
-    navigationItem.searchController = UISearchController()
-    navigationItem.searchController?.searchBar.placeholder = "Search by the movie name"
-    navigationItem.searchController?.obscuresBackgroundDuringPresentation = false
-    navigationItem.searchController?.searchBar.delegate = self
-  }
   func configureCollectionView() {
     collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: CollectionViewLayout.createThreeColumnFlowLayout(in: view))
     collectionView.register(CollectionViewCell.self, forCellWithReuseIdentifier: CollectionViewCell.reuseID)
     collectionView.translatesAutoresizingMaskIntoConstraints = false
-    collectionView.delegate = self
-    collectionView.dataSource = self
     collectionView.backgroundColor = .systemBackground
     view.addSubview(collectionView)
     
@@ -63,93 +62,36 @@ class ToWatchVC: UIViewController {
   }
   
   //MARK: - Data Functions
-  func requestData(movieName: String, page: Int, completion: @escaping () -> ()) {
-    NetworkManager.shared.getMovieWithName(name: movieName, page: page) { (result) in
-      switch result {
-      case .success(let search):
-        var entities: [Entity] = []
-        for movie in search.movies ?? [] {
-          entities.append(Movie.createEntity(movie: movie))
-        }
-        self.movies.append(contentsOf: entities)
-        self.totalResults = Int(search.totalResults) ?? 0
-        completion()
-      case .failure(let error):
-        print("🔴 " + error.localizedDescription)
-      }
-    }
-  }
-  
   func fetchDataFromCoreData() {
-    let fetchRequest: NSFetchRequest<Entity> = Entity.fetchRequest()
     do {
-      movies = try self.coreDataStack.managedContext.fetch(fetchRequest)
-      
-      DispatchQueue.main.async {
-        self.collectionView.reloadData()
-      }
-    } catch {
-      print("🔴" + error.localizedDescription)
+      try fetchedResultsController.performFetch()
+    } catch let error as NSError {
+      print("Fetching error: \(error), \(error.userInfo)")
     }
   }
   
-}
-
-//MARK: CollectionViewDelegate
-
-extension ToWatchVC: UICollectionViewDelegate, UICollectionViewDataSource {
-  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return movies.count
-  }
-  
-  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCell.reuseID, for: indexPath) as! CollectionViewCell
-    let movie = movies[indexPath.row]
-    cell.set(movieName: movie.name ?? "",
-             imdbID: movie.imdbID ?? "",
-             posterLink: movie.posterURLString ?? "")
-    return cell
-  }
-  
-  func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-    let offsetY         = scrollView.contentOffset.y
-    let contentHeight   = scrollView.contentSize.height
-    let height          = scrollView.frame.size.height
-    
-    if offsetY > contentHeight - height {
-      guard hasMoreResults else { return }
-      currentPage += 1
-      self.requestData(movieName: movieName, page: currentPage) {
-        DispatchQueue.main.async {
-          self.collectionView.reloadData()
-        }
+  //MARK - Deffiable data source
+  func configureDataSource() {
+    dataSource = UICollectionViewDiffableDataSource(collectionView: collectionView, cellProvider: { [unowned self] (collectionView, indexPath, entity) -> UICollectionViewCell? in
+      let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCell.reuseID, for: indexPath) as? CollectionViewCell
+      if let entity = try? coreDataStack.managedContext.existingObject(with: entity) as? Entity {
+        guard let name = entity.name,
+              let imdbID = entity.imdbID,
+              let posterLink = entity.posterURLString else { return nil }
+        cell?.set(movieName: name, imdbID: imdbID, posterLink: posterLink)
       }
-    }
+      return cell
+    })
   }
 }
 
+//MARK: - CoreData Extension
 
-//MARK: - Search Delegate
-extension ToWatchVC: UISearchBarDelegate {
-  func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-    print("Search")
-    currentPage = 1
-    movies.removeAll()
-    movieName = searchBar.text ?? ""
-    requestData(movieName: movieName, page: currentPage) {
-      DispatchQueue.main.async {
-        self.collectionView.reloadData()
-      }
-    }
-  }
-  
-  func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-    print("Cancel")
-    currentPage = 1
-    movieName = ""
-    movies.removeAll()
+extension ToWatchVC: NSFetchedResultsControllerDelegate {
+  func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChangeContentWith snapshot: NSDiffableDataSourceSnapshotReference) {
+    let snapshot = snapshot as NSDiffableDataSourceSnapshot<String,NSManagedObjectID>
     DispatchQueue.main.async {
-      self.collectionView.reloadData()
+      self.dataSource.apply(snapshot, animatingDifferences: true)
     }
   }
 }
