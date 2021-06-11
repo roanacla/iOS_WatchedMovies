@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreData
 
 class ToWatchVC: UIViewController {
   
@@ -14,18 +15,26 @@ class ToWatchVC: UIViewController {
   var collectionView: UICollectionView!
   
   //MARK: - Properties
-  var movies: [Movie] = []
+  var movies: [Entity] = []
   var movieName: String = ""
   var currentPage: Int = 1
   var totalResults: Int = 0
   var hasMoreResults: Bool {
     return movies.count < totalResults ? true : false
   }
+  var coreDataStack: CoreDataStack {
+    (UIApplication.shared.delegate as! AppDelegate).coreDataStack
+  }
+  
   //MARK: - View Life Cycle
   override func viewDidLoad() {
     super.viewDidLoad()
-    configureSearchBar()
+    fetchDataFromCoreData()
     configureCollectionView()
+  }
+  
+  override func viewDidAppear(_ animated: Bool) {
+    fetchDataFromCoreData()
   }
   
   //MARK: - View Conf Functions
@@ -58,12 +67,29 @@ class ToWatchVC: UIViewController {
     NetworkManager.shared.getMovieWithName(name: movieName, page: page) { (result) in
       switch result {
       case .success(let search):
-        self.movies.append(contentsOf: search.movies ?? [])
+        var entities: [Entity] = []
+        for movie in search.movies ?? [] {
+          entities.append(Movie.createEntity(movie: movie))
+        }
+        self.movies.append(contentsOf: entities)
         self.totalResults = Int(search.totalResults) ?? 0
         completion()
       case .failure(let error):
         print("🔴 " + error.localizedDescription)
       }
+    }
+  }
+  
+  func fetchDataFromCoreData() {
+    let fetchRequest: NSFetchRequest<Entity> = Entity.fetchRequest()
+    do {
+      movies = try self.coreDataStack.managedContext.fetch(fetchRequest)
+      
+      DispatchQueue.main.async {
+        self.collectionView.reloadData()
+      }
+    } catch {
+      print("🔴" + error.localizedDescription)
     }
   }
   
@@ -79,7 +105,9 @@ extension ToWatchVC: UICollectionViewDelegate, UICollectionViewDataSource {
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCell.reuseID, for: indexPath) as! CollectionViewCell
     let movie = movies[indexPath.row]
-    cell.set(movie: movie)
+    cell.set(movieName: movie.name ?? "",
+             imdbID: movie.imdbID ?? "",
+             posterLink: movie.posterURLString ?? "")
     return cell
   }
   

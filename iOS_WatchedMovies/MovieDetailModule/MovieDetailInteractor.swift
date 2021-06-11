@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 protocol MovieDetailInteractorInterface: class {
   func fetchMovieDetail(imdbID: String)
@@ -18,7 +19,9 @@ class MovieDetailInteractor {
   weak var presenter: MovieDetailPresenterInterface?
   var posterData: Data?
   var movieDetail: MovieDetail?
-  
+  var coreDataStack: CoreDataStack? {
+    (UIApplication.shared.delegate as! AppDelegate).coreDataStack
+  }
   
   private func storeMovieDetailInJson() {
     do {
@@ -29,6 +32,24 @@ class MovieDetailInteractor {
     } catch {
       print("🔴" + error.localizedDescription)
     }
+  }
+  
+  private func storeMovieDetailInCoreData() {
+    guard let context = coreDataStack?.managedContext else { return }
+    guard let movieDetail = movieDetail else { return }
+    let entity = Entity(context: context)
+    entity.imdbID = movieDetail.imdbID
+    entity.name = movieDetail.title
+    entity.year = movieDetail.year
+    entity.plot = movieDetail.plot
+    entity.posterURLString = movieDetail.poster
+    coreDataStack?.saveContext()
+  }
+  
+  private func storeMoviePoster() {
+    guard let movieDetail = movieDetail else { return }
+    guard let posterData = posterData else { return }
+    _ = DataFileManager.shared.storeMoviePoster(movieDetail: movieDetail, posterData: posterData)
   }
 }
 
@@ -46,7 +67,7 @@ extension MovieDetailInteractor: MovieDetailInteractorInterface {
   }
   
   func fetchMoviePoster(movie: Movie) {
-    NetworkManager.shared.getImage(for: movie) { (result) in
+    NetworkManager.shared.getImage(imdbID: movie.imdbID, posterURLString: movie.poster) { (result) in
       switch result {
       case .success(let data):
         self.posterData = data
@@ -58,6 +79,7 @@ extension MovieDetailInteractor: MovieDetailInteractorInterface {
   }
   
   func storeMovieDetail() {
-    self.storeMovieDetailInJson()
+    self.storeMovieDetailInCoreData()
+    self.storeMoviePoster()
   }
 }

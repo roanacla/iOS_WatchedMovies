@@ -26,9 +26,9 @@ class CollectionViewCell: UICollectionViewCell {
   }
   
   
-  func set(movie: Movie) {
-    movieLabel.text = movie.title
-    getMovieImage(movie: movie)
+  func set(movieName: String, imdbID: String, posterLink: String) {
+    movieLabel.text = movieName
+    getMovieImage(imdbID: imdbID, posterLink: posterLink)
   }
   
   
@@ -50,9 +50,9 @@ class CollectionViewCell: UICollectionViewCell {
     ])
   }
   
-  func getMovieImage(movie: Movie) {
+  func getMovieImage(imdbID: String, posterLink: String) {
     imageView.image = nil
-    NetworkManager.shared.getImage(for: movie) { (result) in
+    NetworkManager.shared.getImage(imdbID: imdbID, posterURLString: posterLink) { (result) in
       switch result {
       case .success(let data):
         DispatchQueue.main.async {

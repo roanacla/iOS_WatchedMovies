@@ -27,6 +27,8 @@
 		DB5D20FB267099F900E12EE1 /* Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5D20FA267099F900E12EE1 /* Search.swift */; };
 		DB5D210226715FAD00E12EE1 /* FileManager+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5D210126715FAD00E12EE1 /* FileManager+Extension.swift */; };
 		DB5D21052671910700E12EE1 /* DataFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5D21042671910700E12EE1 /* DataFileManager.swift */; };
+		DB5D21112672D3AE00E12EE1 /* MainModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DB5D210F2672D3AE00E12EE1 /* MainModel.xcdatamodeld */; };
+		DB5D21392672D74B00E12EE1 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5D21382672D74B00E12EE1 /* CoreDataStack.swift */; };
 		DB7F1603265DCE7E00063AB0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7F1602265DCE7E00063AB0 /* AppDelegate.swift */; };
 		DB7F1605265DCE7E00063AB0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7F1604265DCE7E00063AB0 /* SceneDelegate.swift */; };
 		DB7F160C265DCE8100063AB0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB7F160B265DCE8100063AB0 /* Assets.xcassets */; };
@@ -57,6 +59,8 @@
 		DB5D20FA267099F900E12EE1 /* Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Search.swift; sourceTree = "<group>"; };
 		DB5D210126715FAD00E12EE1 /* FileManager+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+Extension.swift"; sourceTree = "<group>"; };
 		DB5D21042671910700E12EE1 /* DataFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataFileManager.swift; sourceTree = "<group>"; };
+		DB5D21102672D3AE00E12EE1 /* MainModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MainModel.xcdatamodel; sourceTree = "<group>"; };
+		DB5D21382672D74B00E12EE1 /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		DB7F15FF265DCE7E00063AB0 /* iOS_WatchedMovies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOS_WatchedMovies.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB7F1602265DCE7E00063AB0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DB7F1604265DCE7E00063AB0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -124,6 +128,7 @@
 				DB7F161A265DD0E300063AB0 /* Movie.swift */,
 				DB5D20F6267098FE00E12EE1 /* MovieDetail.swift */,
 				DB5D20FA267099F900E12EE1 /* Search.swift */,
+				DB5D210F2672D3AE00E12EE1 /* MainModel.xcdatamodeld */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -195,6 +200,7 @@
 				DB57C0B726656ECE00BD62AC /* Custom Views */,
 				DB7F1602265DCE7E00063AB0 /* AppDelegate.swift */,
 				DB7F1604265DCE7E00063AB0 /* SceneDelegate.swift */,
+				DB5D21382672D74B00E12EE1 /* CoreDataStack.swift */,
 				DB7F160B265DCE8100063AB0 /* Assets.xcassets */,
 				DB7F160D265DCE8100063AB0 /* LaunchScreen.storyboard */,
 				DB7F1610265DCE8100063AB0 /* Info.plist */,
@@ -279,6 +285,7 @@
 				DB7F16202660740B00063AB0 /* CustomTableViewCell.swift in Sources */,
 				DB5D20EA2670815300E12EE1 /* MovieDetailInteractor.swift in Sources */,
 				DB5D20F22670819100E12EE1 /* SearchPresenter.swift in Sources */,
+				DB5D21112672D3AE00E12EE1 /* MainModel.xcdatamodeld in Sources */,
 				DB5D20B6266FD1E000E12EE1 /* ToWatchVC.swift in Sources */,
 				DB57C0C62665BBBB00BD62AC /* CollectionVC.swift in Sources */,
 				DB5D20F7267098FE00E12EE1 /* MovieDetail.swift in Sources */,
@@ -290,6 +297,7 @@
 				DB5D20F12670819100E12EE1 /* SearchViewController.swift in Sources */,
 				DB5D210226715FAD00E12EE1 /* FileManager+Extension.swift in Sources */,
 				DB5D21052671910700E12EE1 /* DataFileManager.swift in Sources */,
+				DB5D21392672D74B00E12EE1 /* CoreDataStack.swift in Sources */,
 				DB5D20F32670819100E12EE1 /* SearchInteractor.swift in Sources */,
 				DB57C0BA26656F5200BD62AC /* TabBarController.swift in Sources */,
 				DB5D20E82670815300E12EE1 /* MovieDetailRouter.swift in Sources */,
@@ -489,6 +497,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		DB5D210F2672D3AE00E12EE1 /* MainModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				DB5D21102672D3AE00E12EE1 /* MainModel.xcdatamodel */,
+			);
+			currentVersion = DB5D21102672D3AE00E12EE1 /* MainModel.xcdatamodel */;
+			path = MainModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = DB7F15F7265DCE7E00063AB0 /* Project object */;
 }

@@ -103,9 +103,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
     let favoriteAction = UIContextualAction(style: .normal,
-                                            title: "Mark as favorite") { [weak self] (action, view, completion) in
-//      let movie = self?.dataSource[indexPath.row]
-//      self?.markAsFavorite(movie: movie)
+                                            title: "Mark as favorite") { (action, view, completion) in
       completion(true)
     }
     favoriteAction.backgroundColor = .systemGreen

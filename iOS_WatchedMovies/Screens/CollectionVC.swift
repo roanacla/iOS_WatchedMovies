@@ -71,7 +71,7 @@ class CollectionVC: UIViewController {
   func configureDataSource() {
     dataSource = UICollectionViewDiffableDataSource(collectionView: collectionView, cellProvider: { (collectionView, indexPath, movie) -> UICollectionViewCell? in
       let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCell.reuseID, for: indexPath) as? CollectionViewCell
-      cell?.set(movie: movie)
+      cell?.set(movieName: movie.title, imdbID: movie.imdbID, posterLink: movie.poster)
       return cell
     })
   }

@@ -59,7 +59,7 @@ class CustomTableViewCell: UITableViewCell {
   
   func getMovieImage(movie: Movie) {
     customImageView.image = nil
-    NetworkManager.shared.getImage(for: movie) { (result) in
+    NetworkManager.shared.getImage(imdbID: movie.imdbID, posterURLString: movie.poster) { (result) in
       switch result {
       case .success(let data):
         DispatchQueue.main.async {

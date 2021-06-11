@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import UIKit
 
 enum RequestError: String, Error {
   case noData = "No data received"
@@ -91,13 +90,13 @@ class NetworkManager {
     }.resume()
   }
   
-  func getImage(for movie: Movie, completion: @escaping (Result<Data, RequestError>) -> Void) {
-    if let data = cache.object(forKey: NSString(string: movie.imdbID)) {
+  func getImage(imdbID: String, posterURLString: String, completion: @escaping (Result<Data, RequestError>) -> Void) {
+    if let data = cache.object(forKey: NSString(string: imdbID)) {
       completion(.success(Data(data)))
       return
     }
     
-    guard let url = URL(string: movie.poster) else {
+    guard let url = URL(string: posterURLString) else {
       completion(.failure(.invalidURL))
       return
     }
@@ -119,7 +118,7 @@ class NetworkManager {
         completion(.failure(.noData))
         return
       }
-      self.cache.setObject(NSData(data: data), forKey: NSString(string: movie.imdbID))
+      self.cache.setObject(NSData(data: data), forKey: NSString(string: imdbID))
       completion(.success(data))
     }
     request.resume()
