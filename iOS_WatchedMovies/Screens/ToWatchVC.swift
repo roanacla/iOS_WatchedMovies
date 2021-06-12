@@ -42,7 +42,10 @@ class ToWatchVC: UIViewController {
   }
   
   override func viewDidAppear(_ animated: Bool) {
-    fetchDataFromCoreData()
+    super.viewDidAppear(animated)
+    UIView.performWithoutAnimation {
+      fetchDataFromCoreData()
+    }
   }
   
   //MARK: - View Conf Functions

@@ -52,6 +52,16 @@ class CollectionViewCell: UICollectionViewCell {
   
   func getMovieImage(imdbID: String, posterLink: String) {
     imageView.image = nil
+    let result = DataFileManager.shared.getMoviePoster(imdbID: imdbID)
+    switch result {
+    case .success(let data):
+      DispatchQueue.main.async {
+        self.imageView.image = UIImage(data: data)
+      }
+      return
+    default:
+      break
+    }
     NetworkManager.shared.getImage(imdbID: imdbID, posterURLString: posterLink) { (result) in
       switch result {
       case .success(let data):
