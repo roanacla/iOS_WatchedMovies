@@ -41,12 +41,12 @@ class CollectionViewCell: UICollectionViewCell {
       imageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: padding),
       imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: padding),
       imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -padding),
-      imageView.heightAnchor.constraint(equalTo: imageView.widthAnchor),
       
       movieLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 12),
       movieLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: padding),
       movieLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -padding),
-      movieLabel.heightAnchor.constraint(equalToConstant: 20)
+      movieLabel.heightAnchor.constraint(equalToConstant: 20),
+      movieLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
     ])
   }
   
