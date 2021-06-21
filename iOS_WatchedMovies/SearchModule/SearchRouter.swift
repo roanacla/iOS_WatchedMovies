@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import CoreData
 
 protocol SearchRouterInterface: class {
   func setNavigationController(_ navController: UINavigationController)
@@ -38,7 +39,10 @@ extension SearchRouter: SearchRouterInterface {
   }
   
   func performSegue(for movie: Movie) {
-    let movieDetailVC = MovieDetailRouter.setupModule(for: movie)
+    let coreDataStack = (UIApplication.shared.delegate as! AppDelegate).coreDataStack
+    let childContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
+    childContext.parent = coreDataStack.managedContext
+    let movieDetailVC = MovieDetailRouter.setupModule(for: movie,context: childContext)
     self.navigationController?.pushViewController(movieDetailVC, animated: true)
   }
 }

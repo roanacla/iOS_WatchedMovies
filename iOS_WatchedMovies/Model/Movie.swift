@@ -20,14 +20,4 @@ struct Movie: Codable, Hashable {
   var year: String = ""
   var poster: String = ""
   var imdbID: String = ""
-  
-  static func createEntity(movie: Movie) -> Entity {
-    let entity = Entity()
-    entity.name = movie.title
-    entity.year = movie.year
-    entity.posterURLString = movie.poster
-    entity.imdbID = movie.imdbID
-    
-    return entity
-  }
 }

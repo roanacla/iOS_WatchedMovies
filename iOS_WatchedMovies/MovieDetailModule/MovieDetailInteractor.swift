@@ -8,21 +8,21 @@
 
 import Foundation
 import UIKit
+import CoreData
 
-protocol MovieDetailInteractorInterface: class {
+//MARK: - Interface
+protocol MovieDetailInteractorInterface: AnyObject {
   func fetchMovieDetail(imdbID: String)
   func fetchMoviePoster(movie: Movie)
   func storeMovieDetail()
 }
 
+//MARK: - Class
 class MovieDetailInteractor {
   weak var presenter: MovieDetailPresenterInterface?
   var posterData: Data?
   var movieDetail: MovieDetail?
-  var coreDataStack: CoreDataStack? {
-    (UIApplication.shared.delegate as! AppDelegate).coreDataStack
-  }
-  
+  var context: NSManagedObjectContext!
   private func storeMovieDetailInJson() {
     do {
       guard let movieDetail = movieDetail else { return }
@@ -35,15 +35,26 @@ class MovieDetailInteractor {
   }
   
   private func storeMovieDetailInCoreData() {
-    guard let context = coreDataStack?.managedContext else { return }
+    guard let context = context else { return }
     guard let movieDetail = movieDetail else { return }
-    let entity = Entity(context: context)
-    entity.imdbID = movieDetail.imdbID
-    entity.name = movieDetail.title
-    entity.year = movieDetail.year
-    entity.plot = movieDetail.plot
-    entity.posterURLString = movieDetail.poster
-    coreDataStack?.saveContext()
+    let cdMovie = CDMovie(context: context)
+    cdMovie.imdbId = movieDetail.imdbID
+    cdMovie.name = movieDetail.title
+    cdMovie.year = movieDetail.year
+    cdMovie.plot = movieDetail.plot
+    cdMovie.posterURLString = movieDetail.poster
+    
+    guard context.hasChanges else { return }
+    
+    context.perform {
+      do {
+        try context.save()
+        try context.parent?.save()
+      } catch let error as NSError {
+        print("🔴" + error.localizedDescription)
+      }
+    }
+
   }
   
   private func storeMoviePoster() {
@@ -53,6 +64,7 @@ class MovieDetailInteractor {
   }
 }
 
+//MARK: - Extension
 extension MovieDetailInteractor: MovieDetailInteractorInterface {
   func fetchMovieDetail(imdbID: String) {
     NetworkManager.shared.getMovieByID(id: imdbID) { (result) in

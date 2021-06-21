@@ -20,9 +20,9 @@ class ToWatchVC: UIViewController {
   var coreDataStack: CoreDataStack {
     (UIApplication.shared.delegate as! AppDelegate).coreDataStack
   }
-  lazy var fetchedResultsController: NSFetchedResultsController<Entity> = {
-    let fetchRequest: NSFetchRequest<Entity> = Entity.fetchRequest()
-    let sortByYear = NSSortDescriptor(key: #keyPath(Entity.year), ascending: false)
+  lazy var fetchedResultsController: NSFetchedResultsController<CDMovie> = {
+    let fetchRequest: NSFetchRequest<CDMovie> = CDMovie.fetchRequest()
+    let sortByYear = NSSortDescriptor(key: #keyPath(CDMovie.year), ascending: false)
     fetchRequest.sortDescriptors = [sortByYear]
     let fetchedResultsController = NSFetchedResultsController(
       fetchRequest: fetchRequest,
@@ -77,10 +77,10 @@ class ToWatchVC: UIViewController {
   func configureDataSource() {
     dataSource = UICollectionViewDiffableDataSource(collectionView: collectionView, cellProvider: { [unowned self] (collectionView, indexPath, entity) -> UICollectionViewCell? in
       let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCell.reuseID, for: indexPath) as? CollectionViewCell
-      if let entity = try? coreDataStack.managedContext.existingObject(with: entity) as? Entity {
-        guard let name = entity.name,
-              let imdbID = entity.imdbID,
-              let posterLink = entity.posterURLString else { return nil }
+      if let cdMovie = try? coreDataStack.managedContext.existingObject(with: entity) as? CDMovie {
+        guard let name = cdMovie.name,
+              let imdbID = cdMovie.imdbId,
+              let posterLink = cdMovie.posterURLString else { return nil }
         cell?.set(movieName: name, imdbID: imdbID, posterLink: posterLink)
       }
       return cell
