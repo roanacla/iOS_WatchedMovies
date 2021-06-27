@@ -43,6 +43,7 @@ class MovieDetailInteractor {
     cdMovie.year = movieDetail.year
     cdMovie.plot = movieDetail.plot
     cdMovie.posterURLString = movieDetail.poster
+    cdMovie.lists = [DatabaseManager.getToWatchList(using: context)]
     
     guard context.hasChanges else { return }
     

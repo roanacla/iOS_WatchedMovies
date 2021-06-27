@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DB4F6777268253E4006F80FA /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4F6776268253E4006F80FA /* DatabaseManager.swift */; };
+		DB4F677A26825D3F006F80FA /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4F677926825D3F006F80FA /* Constants.swift */; };
 		DB57C0BA26656F5200BD62AC /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB57C0B926656F5200BD62AC /* TabBarController.swift */; };
 		DB57C0BF2665708A00BD62AC /* DiffableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB57C0BE2665708A00BD62AC /* DiffableVC.swift */; };
 		DB57C0C62665BBBB00BD62AC /* CollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB57C0C52665BBBB00BD62AC /* CollectionVC.swift */; };
@@ -39,6 +41,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DB4F6776268253E4006F80FA /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
+		DB4F677926825D3F006F80FA /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		DB57C0B926656F5200BD62AC /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		DB57C0BE2665708A00BD62AC /* DiffableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiffableVC.swift; sourceTree = "<group>"; };
 		DB57C0C52665BBBB00BD62AC /* CollectionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionVC.swift; sourceTree = "<group>"; };
@@ -83,6 +87,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DB4F677826825D33006F80FA /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				DB4F677926825D3F006F80FA /* Constants.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
 		DB57C0B726656ECE00BD62AC /* Custom Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -118,6 +130,7 @@
 				DB7F1617265DCED000063AB0 /* NetworkManager.swift */,
 				DB5D210126715FAD00E12EE1 /* FileManager+Extension.swift */,
 				DB5D21042671910700E12EE1 /* DataFileManager.swift */,
+				DB4F6776268253E4006F80FA /* DatabaseManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -192,6 +205,7 @@
 		DB7F1601265DCE7E00063AB0 /* iOS_WatchedMovies */ = {
 			isa = PBXGroup;
 			children = (
+				DB4F677826825D33006F80FA /* Utilities */,
 				DB57C0C32665BAAB00BD62AC /* Model */,
 				DB5D20D026703A6200E12EE1 /* SearchModule */,
 				DB5D20BF26702B8A00E12EE1 /* MovieDetailModule */,
@@ -289,6 +303,7 @@
 				DB5D20B6266FD1E000E12EE1 /* ToWatchVC.swift in Sources */,
 				DB57C0C62665BBBB00BD62AC /* CollectionVC.swift in Sources */,
 				DB5D20F7267098FE00E12EE1 /* MovieDetail.swift in Sources */,
+				DB4F677A26825D3F006F80FA /* Constants.swift in Sources */,
 				DB57C0BF2665708A00BD62AC /* DiffableVC.swift in Sources */,
 				DB7F1618265DCED000063AB0 /* NetworkManager.swift in Sources */,
 				DB7F1603265DCE7E00063AB0 /* AppDelegate.swift in Sources */,
@@ -298,6 +313,7 @@
 				DB5D210226715FAD00E12EE1 /* FileManager+Extension.swift in Sources */,
 				DB5D21052671910700E12EE1 /* DataFileManager.swift in Sources */,
 				DB5D21392672D74B00E12EE1 /* CoreDataStack.swift in Sources */,
+				DB4F6777268253E4006F80FA /* DatabaseManager.swift in Sources */,
 				DB5D20F32670819100E12EE1 /* SearchInteractor.swift in Sources */,
 				DB57C0BA26656F5200BD62AC /* TabBarController.swift in Sources */,
 				DB5D20E82670815300E12EE1 /* MovieDetailRouter.swift in Sources */,
