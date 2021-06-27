@@ -24,6 +24,7 @@ class ToWatchVC: UIViewController {
     let fetchRequest: NSFetchRequest<CDMovie> = CDMovie.fetchRequest()
     let sortByYear = NSSortDescriptor(key: #keyPath(CDMovie.year), ascending: false)
     fetchRequest.sortDescriptors = [sortByYear]
+    fetchRequest.predicate = NSPredicate(format: "ANY lists.name == %@", ListName.toWatchList.rawValue)
     let fetchedResultsController = NSFetchedResultsController(
       fetchRequest: fetchRequest,
       managedObjectContext: coreDataStack.managedContext,

@@ -8,7 +8,7 @@
 import Foundation
 import CoreData
 
-private enum ListName: String {
+enum ListName: String {
   case watchedList = "WatchedList"
   case toWatchList = "ToWatchList"
 }
