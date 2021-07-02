@@ -14,7 +14,7 @@ class TabBarController: UITabBarController {
     
     UITabBar.appearance().tintColor = .systemGreen
     
-    viewControllers = [createSearchNC(), createToWatchNC()]
+    viewControllers = [createSearchNC(), createWatchedNC(), createToWatchNC()]
   }
   
   func createSearchNC() -> UINavigationController {
@@ -25,14 +25,21 @@ class TabBarController: UITabBarController {
     return UINavigationController(rootViewController: SearchVC)
   }
   
+  func createWatchedNC() -> UINavigationController {
+    let watchedVC = WatchedMoviesRouter.setupModule()
+    watchedVC.title = "Watched Movies"
+    watchedVC.tabBarItem = UITabBarItem.init(title: "Watched", image: UIImage(systemName: "film"), tag: 1)
+    
+    return UINavigationController(rootViewController: watchedVC)
+  }
+  
   func createToWatchNC() -> UINavigationController {
     let commCollVC = ToWatchVC()
     commCollVC.title = "To Watch"
-    commCollVC.tabBarItem = UITabBarItem.init(title: "To watch", image: UIImage(systemName: "list.number"), tag: 1)
+    commCollVC.tabBarItem = UITabBarItem.init(title: "To watch", image: UIImage(systemName: "list.number"), tag: 2)
     
     return UINavigationController(rootViewController: commCollVC)
   }
-  
   
   func createDiffableNC() -> UINavigationController {
     let diffableVC         = DiffableVC()
