@@ -13,7 +13,7 @@
                 <outlet property="imageView" destination="ggO-fj-Z3c" id="UJj-BT-Mkk"/>
                 <outlet property="nameLabel" destination="d0I-sb-Ynu" id="ye3-1p-c3w"/>
                 <outlet property="plotLabel" destination="sZ9-fe-gmq" id="hTX-nE-olg"/>
-                <outlet property="view" destination="iN0-l3-epB" id="FKI-3N-mCD"/>
+                <outlet property="view" destination="iN0-l3-epB" id="7zM-A0-7cG"/>
                 <outlet property="yearLabel" destination="s5u-zm-Rms" id="hqc-93-3AW"/>
             </connections>
         </placeholder>

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DB13FCDC26C1FB920042E8FD /* WatchedMoviesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DB13FCDB26C1FB920042E8FD /* WatchedMoviesView.xib */; };
 		DB4F6777268253E4006F80FA /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4F6776268253E4006F80FA /* DatabaseManager.swift */; };
 		DB4F677A26825D3F006F80FA /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4F677926825D3F006F80FA /* Constants.swift */; };
 		DB57C0BA26656F5200BD62AC /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB57C0B926656F5200BD62AC /* TabBarController.swift */; };
@@ -35,7 +36,6 @@
 		DB640331268ED0B4006017E2 /* WatchedMoviesRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB64032D268ED0B4006017E2 /* WatchedMoviesRouter.swift */; };
 		DB640332268ED0B4006017E2 /* WatchedMoviesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB64032E268ED0B4006017E2 /* WatchedMoviesViewController.swift */; };
 		DB640333268ED0B4006017E2 /* WatchedMoviesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB64032F268ED0B4006017E2 /* WatchedMoviesPresenter.swift */; };
-		DB640335268ED158006017E2 /* WatchedMovies.xib in Resources */ = {isa = PBXBuildFile; fileRef = DB640334268ED158006017E2 /* WatchedMovies.xib */; };
 		DB7F1603265DCE7E00063AB0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7F1602265DCE7E00063AB0 /* AppDelegate.swift */; };
 		DB7F1605265DCE7E00063AB0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7F1604265DCE7E00063AB0 /* SceneDelegate.swift */; };
 		DB7F160C265DCE8100063AB0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB7F160B265DCE8100063AB0 /* Assets.xcassets */; };
@@ -46,6 +46,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DB13FCDB26C1FB920042E8FD /* WatchedMoviesView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WatchedMoviesView.xib; sourceTree = "<group>"; };
 		DB4F6776268253E4006F80FA /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		DB4F677926825D3F006F80FA /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		DB57C0B926656F5200BD62AC /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
@@ -74,7 +75,6 @@
 		DB64032D268ED0B4006017E2 /* WatchedMoviesRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchedMoviesRouter.swift; sourceTree = "<group>"; };
 		DB64032E268ED0B4006017E2 /* WatchedMoviesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchedMoviesViewController.swift; sourceTree = "<group>"; };
 		DB64032F268ED0B4006017E2 /* WatchedMoviesPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchedMoviesPresenter.swift; sourceTree = "<group>"; };
-		DB640334268ED158006017E2 /* WatchedMovies.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WatchedMovies.xib; sourceTree = "<group>"; };
 		DB7F15FF265DCE7E00063AB0 /* iOS_WatchedMovies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOS_WatchedMovies.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB7F1602265DCE7E00063AB0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DB7F1604265DCE7E00063AB0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -203,7 +203,7 @@
 				DB64032D268ED0B4006017E2 /* WatchedMoviesRouter.swift */,
 				DB64032E268ED0B4006017E2 /* WatchedMoviesViewController.swift */,
 				DB64032F268ED0B4006017E2 /* WatchedMoviesPresenter.swift */,
-				DB640334268ED158006017E2 /* WatchedMovies.xib */,
+				DB13FCDB26C1FB920042E8FD /* WatchedMoviesView.xib */,
 			);
 			path = WatchedMoviesModule;
 			sourceTree = "<group>";
@@ -302,8 +302,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DB13FCDC26C1FB920042E8FD /* WatchedMoviesView.xib in Resources */,
 				DB5D20CE2670371A00E12EE1 /* MovieDetailView.xib in Resources */,
-				DB640335268ED158006017E2 /* WatchedMovies.xib in Resources */,
 				DB7F160F265DCE8100063AB0 /* LaunchScreen.storyboard in Resources */,
 				DB7F160C265DCE8100063AB0 /* Assets.xcassets in Resources */,
 			);

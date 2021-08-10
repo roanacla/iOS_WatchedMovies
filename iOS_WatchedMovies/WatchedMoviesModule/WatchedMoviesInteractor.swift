@@ -9,7 +9,7 @@
 import Foundation
 
 protocol WatchedMoviesInteractorInterface: class {
-
+  func notifyViewDidLoad
 }
 
 class WatchedMoviesInteractor {
